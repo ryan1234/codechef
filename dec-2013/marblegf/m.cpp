@@ -42,7 +42,7 @@ inline void s( int &n )
 
 int getMid(int s, int e) {  return s + (e -s)/2;  }
  
-int getSumUtil(int *st, int ss, int se, int qs, int qe, int index)
+long long int getSumUtil(long long int *st, int ss, int se, int qs, int qe, int index)
 {
     if (qs <= ss && qe >= se)
         return st[index];
@@ -55,7 +55,7 @@ int getSumUtil(int *st, int ss, int se, int qs, int qe, int index)
            getSumUtil(st, mid+1, se, qs, qe, 2*index+2);
 }
  
-void updateValueUtil(int *st, int ss, int se, int i, int diff, int index)
+void updateValueUtil(long long int *st, int ss, int se, int i, int diff, int index)
 {
     if (i < ss || i > se)
         return;
@@ -69,7 +69,7 @@ void updateValueUtil(int *st, int ss, int se, int i, int diff, int index)
     }
 }
  
-void updateValue(int arr[], int *st, int n, int i, int new_val)
+void updateValue(long long int arr[], long long int *st, int n, int i, int new_val)
 {
     if (i < 0 || i > n-1)
     {
@@ -77,14 +77,14 @@ void updateValue(int arr[], int *st, int n, int i, int new_val)
         return;
     }
  
-    int diff = (arr[i] + new_val) - arr[i];
+    long long int diff = (arr[i] + new_val) - arr[i];
  
     arr[i] = arr[i] + new_val;
  
     updateValueUtil(st, 0, n-1, i, diff, 0);
 }
  
-int getSum(int *st, int n, int qs, int qe)
+long long int getSum(long long int *st, int n, int qs, int qe)
 {
     if (qs < 0 || qe > n-1 || qs > qe)
     {
@@ -95,7 +95,7 @@ int getSum(int *st, int n, int qs, int qe)
     return getSumUtil(st, 0, n-1, qs, qe, 0);
 }
  
-int constructSTUtil(int arr[], int ss, int se, int *st, int si)
+long long int constructSTUtil(long long int arr[], int ss, int se, long long int *st, int si)
 {
     if (ss == se)
     {
@@ -109,11 +109,11 @@ int constructSTUtil(int arr[], int ss, int se, int *st, int si)
     return st[si];
 }
  
-int *constructST(int arr[], int n)
+long long int *constructST(long long int arr[], int n)
 {
     int x = (int)(ceil(log2(n))); //Height of segment tree
     int max_size = 2*(int)pow(2, x) - 1; //Maximum size of segment tree
-    int *st = new int[max_size];
+    long long int *st = new long long int[max_size];
  
     constructSTUtil(arr, 0, n-1, st, 0);
  
@@ -127,7 +127,7 @@ int main()
 
     cin >> n >> q;
 
-    int array[n];
+    long long int array[n];
 
     for(int i=0;i<n;i++)
         s(array[i]);
@@ -135,7 +135,7 @@ int main()
     char op;
     int j, k;
 
-    int *st = constructST(array, n);
+    long long int *st = constructST(array, n);
 
     for(int i = 0; i < q; i++) {
         cin >> op >> j >> k;
