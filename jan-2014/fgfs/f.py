@@ -1,36 +1,39 @@
 import sys
 
-tests = int(raw_input())
+@profile
+def main():
+	inp = map(int, sys.stdin.read().split())
 
-for test in xrange(tests):
-	nk = map(int, raw_input().split())
-	n = nk[0]
-	k = nk[1]
+	tests = inp[0]
+	readAt = 1
 
-	spots = {}
+	for test in xrange(tests):
+		nk = inp[readAt:readAt + 2]
+		readAt += 2
 
-	for nn in xrange(n):
-		sfp = map(int, raw_input().split())
-		s = sfp[0]
-		f = sfp[1]
-		p = sfp[2]
+		spots = {}
 
-		if not p in spots:
-			spots[p] = []
+		for nn in xrange(nk[0]):
+			sfp = inp[readAt:readAt + 3]
+			readAt += 3
 
-		spots[p].append((s, f))
+			s = sfp[0]
+			f = sfp[1]
+			p = sfp[2]
 
-	total = 0
+			if not p in spots:
+				spots[p] = []
 
-	for spot in spots:
-		ss = sorted(spots[spot], key=lambda x: x[1])
-		O = []
-		finish = 0
-		for s in ss:
-			if finish <= s[0]:
-				finish = s[1]
-				O.append(s)
+			spots[p].append((s, f))
+		total = 0
 
-		total += len(O)
+		for spot in spots:
+			ss = sorted(spots[spot], key=lambda x: x[1])
+			finish = 0
+			for s in ss:
+				if finish <= s[0]:
+					finish = s[1]
+					total += 1
+		print total
 
-	print total
+main()
