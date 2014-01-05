@@ -12,9 +12,9 @@ for i in xrange(tests):
 
 	# answer = s * ((c + 1) ** (d - 1))
 	# (l / s, c + 1) = d - 1
-	answer = math.log(l / s, c + 1)
+	answer = math.log(l / s, c + 1) + 1
 
-	if answer <= 1:
+	if answer <= d:
 		print "ALIVE AND KICKING"
 	else:
 		print "DEAD AND ROTTING"
