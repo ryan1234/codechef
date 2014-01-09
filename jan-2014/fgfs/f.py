@@ -20,5 +20,17 @@ for test in xrange(tests):
 
 		spots[p].append((s, f))
 
+	total = 0
+
 	for spot in spots:
-		print sorted(spots[spot], key=lambda x: x[1])
+		ss = sorted(spots[spot], key=lambda x: x[1])
+		O = []
+		finish = 0
+		for s in ss:
+			if finish <= s[0]:
+				finish = s[1]
+				O.append(s)
+
+		total += len(O)
+
+	print total
